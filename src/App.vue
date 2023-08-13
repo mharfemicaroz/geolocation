@@ -1,5 +1,17 @@
 <template>
-  {{ jsonData }}
+  {{ dbCoordinate }}
+  <div>
+    <iframe
+      width="800"
+      height="600"
+      frameborder="0"
+      style="border: 0"
+      referrerpolicy="no-referrer-when-downgrade"
+      :src="`https://www.google.com/maps/embed/v1/place?key=AIzaSyCMJwrVEJhnB8KqT7zQUV0w2sMIsEMO8NM&q=${dbCoordinate.latitude},${dbCoordinate.longitude}`"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
 </template>
 
 <script>
@@ -8,6 +20,7 @@ export default {
   data() {
     return {
       jsonData: {},
+      lastCoordinate: null,
       options: {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -25,11 +38,19 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.watchPosition((position) => {
           this.displayData(position.coords, position.timestamp);
-          axios.post("https://sumharfe.pythonanywhere.com/location/", {
-            timestamp: position.timestamp,
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
+          axios
+            .post("https://sumharfe.pythonanywhere.com/location/", {
+              timestamp: position.timestamp,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            })
+            .then((res) => {
+              axios
+                .get("https://sumharfe.pythonanywhere.com/location/")
+                .then((response) => {
+                  this.dbCoordinate = response.data[response.data.length - 1];
+                });
+            });
         });
       } else {
         this.jsonData = "Geolocation is not supported by this browser.";
@@ -43,7 +64,7 @@ export default {
           longitude: position.longitude,
           accuracy: position.accuracy,
         },
-        version: "2.1.0",
+        version: "2.4.0",
       };
     },
     displayError(err) {
