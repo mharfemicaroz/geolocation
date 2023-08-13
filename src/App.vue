@@ -1,6 +1,4 @@
-<template>
-  <JSON>{{ jsonData }}</JSON>
-</template>
+<template></template>
 
 <script>
 export default {
@@ -44,6 +42,7 @@ export default {
         },
         version: "1.4.0",
       };
+      document.getElementById("app").innerHTML = JSON.stringify(this.jsonData);
     },
     displayError(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
