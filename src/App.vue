@@ -1,5 +1,17 @@
 <template>
   {{ jsonData }}
+  <div>
+    <iframe
+      width="450"
+      height="250"
+      frameborder="0"
+      style="border: 0"
+      referrerpolicy="no-referrer-when-downgrade"
+      :src="`https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyCMJwrVEJhnB8KqT7zQUV0w2sMIsEMO8NM&q=Pantukan&center=${jsonData.coordinates.latitude},${jsonData.coordinates.longitude}`"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
 </template>
 
 <script>
