@@ -1,18 +1,5 @@
 <template>
   {{ jsonData }}
-
-  <div>
-    <iframe
-      width="800"
-      height="600"
-      frameborder="0"
-      style="border: 0"
-      referrerpolicy="no-referrer-when-downgrade"
-      :src="`https://www.google.com/maps/embed/v1/place?key=AIzaSyCMJwrVEJhnB8KqT7zQUV0w2sMIsEMO8NM&q=${jsonData.coordinates.latitude},${jsonData.coordinates.longitude}`"
-      allowfullscreen
-    >
-    </iframe>
-  </div>
 </template>
 
 <script>
