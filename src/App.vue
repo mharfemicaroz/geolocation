@@ -3,8 +3,8 @@
 
   <div>
     <iframe
-      width="450"
-      height="250"
+      width="800"
+      height="600"
       frameborder="0"
       style="border: 0"
       referrerpolicy="no-referrer-when-downgrade"
