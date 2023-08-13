@@ -7,6 +7,11 @@ export default {
   data() {
     return {
       jsonData: {},
+      options: {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      },
     };
   },
   mounted() {
@@ -19,7 +24,11 @@ export default {
     generateData() {
       const par = null;
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.displayData);
+        navigator.geolocation.getCurrentPosition(
+          this.displayData,
+          this.displayError,
+          this.options
+        );
       } else {
         this.jsonData = "Geolocation is not supported by this browser.";
       }
@@ -32,6 +41,9 @@ export default {
           longitude: position.coords.longitude,
         },
       };
+    },
+    displayError(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
     },
   },
 };
