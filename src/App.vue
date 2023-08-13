@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     generateData() {
-      const par = null;
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           this.displayData,
@@ -40,6 +39,7 @@ export default {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         },
+        version: "1.1.0",
       };
     },
     displayError(err) {
