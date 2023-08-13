@@ -1,6 +1,9 @@
-<template></template>
+<template>
+  {{ jsonData }}
+</template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -22,6 +25,11 @@ export default {
       if (navigator.geolocation) {
         navigator.geolocation.watchPosition((position) => {
           this.displayData(position.coords, position.timestamp);
+          axios.post("https://sumharfe.pythonanywhere.com/location/", {
+            timestamp: position.timestamp,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
         });
       } else {
         this.jsonData = "Geolocation is not supported by this browser.";
@@ -37,8 +45,6 @@ export default {
         },
         version: "1.4.0",
       };
-      document.getElementById("app").innerHTML = JSON.stringify(this.jsonData);
-      document.title = JSON.stringify(this.jsonData);
     },
     displayError(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
