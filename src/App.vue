@@ -23,11 +23,14 @@ export default {
   methods: {
     generateData() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          this.displayData,
-          this.displayError,
-          this.options
-        );
+        navigator.geolocation.watchPosition((position) => {
+          this.displayData(position.coords);
+        });
+        // navigator.geolocation.getCurrentPosition(
+        //   this.displayData,
+        //   this.displayError,
+        //   this.options
+        // );
       } else {
         this.jsonData = "Geolocation is not supported by this browser.";
       }
@@ -36,10 +39,10 @@ export default {
       this.jsonData = {
         timestamp: new Date().toISOString(),
         coordinates: {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          latitude: position.latitude,
+          longitude: position.longitude,
         },
-        version: "1.1.0",
+        version: "1.3.0",
       };
     },
     displayError(err) {
