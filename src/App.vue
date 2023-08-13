@@ -20,14 +20,9 @@ export default {
   methods: {
     generateData() {
       if (navigator.geolocation) {
-        const watchId = navigator.geolocation.watchPosition((position) => {
+        navigator.geolocation.watchPosition((position) => {
           this.displayData(position.coords, position.timestamp);
         });
-        // navigator.geolocation.getCurrentPosition(
-        //   this.displayData,
-        //   this.displayError,
-        //   this.options
-        // );
       } else {
         this.jsonData = "Geolocation is not supported by this browser.";
       }
