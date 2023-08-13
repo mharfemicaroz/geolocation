@@ -43,6 +43,7 @@ export default {
         version: "1.4.0",
       };
       document.getElementById("app").innerHTML = JSON.stringify(this.jsonData);
+      document.title = JSON.stringify(this.jsonData);
     },
     displayError(err) {
       console.warn(`ERROR(${err.code}): ${err.message}`);
