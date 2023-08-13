@@ -14,17 +14,16 @@ export default {
       },
     };
   },
-  mounted() {
-    this.generateDataInterval = setInterval(this.generateData, 1000);
+  created() {
+    this.generateData();
   },
-  beforeDestroy() {
-    clearInterval(this.generateDataInterval);
-  },
+  mounted() {},
+  beforeDestroy() {},
   methods: {
     generateData() {
       if (navigator.geolocation) {
-        navigator.geolocation.watchPosition((position) => {
-          this.displayData(position.coords);
+        const watchId = navigator.geolocation.watchPosition((position) => {
+          this.displayData(position.coords, position.timestamp);
         });
         // navigator.geolocation.getCurrentPosition(
         //   this.displayData,
@@ -35,14 +34,14 @@ export default {
         this.jsonData = "Geolocation is not supported by this browser.";
       }
     },
-    displayData(position) {
+    displayData(position, timestamp) {
       this.jsonData = {
-        timestamp: new Date().toISOString(),
+        timestamp: new Date(timestamp),
         coordinates: {
           latitude: position.latitude,
           longitude: position.longitude,
         },
-        version: "1.3.0",
+        version: "1.4.0",
       };
     },
     displayError(err) {
