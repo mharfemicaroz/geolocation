@@ -1,5 +1,5 @@
 <template>
-  {{ jsonData }}
+  <JSON>{{ jsonData }}</JSON>
 </template>
 
 <script>
