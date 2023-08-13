@@ -43,7 +43,7 @@ export default {
           longitude: position.longitude,
           accuracy: position.accuracy,
         },
-        version: "1.4.0",
+        version: "2.1.0",
       };
     },
     displayError(err) {
