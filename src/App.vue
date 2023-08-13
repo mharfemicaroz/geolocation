@@ -23,7 +23,7 @@ export default {
       options: {
         enableHighAccuracy: true,
         timeout: 5000,
-        maximumAge: 0,
+        maximumAge: 10000,
       },
     };
   },
@@ -53,6 +53,7 @@ export default {
         coordinates: {
           latitude: position.latitude,
           longitude: position.longitude,
+          accuracy: position.accuracy,
         },
         version: "1.4.0",
       };
