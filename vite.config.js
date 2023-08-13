@@ -15,5 +15,5 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./geolocation/src", import.meta.url)),
     },
   },
-  base: "./geolocation/",
+  base: "./",
 });
